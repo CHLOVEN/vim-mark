@@ -46,12 +46,13 @@ endif
 if ! exists('g:mwPalettes')
 	let g:mwPalettes = {
 	\	'original': [
-		\   { 'ctermbg':'Cyan',       'ctermfg':'Black', 'guibg':'#8CCBEA', 'guifg':'Black' },
-		\   { 'ctermbg':'Green',      'ctermfg':'Black', 'guibg':'#A4E57E', 'guifg':'Black' },
-		\   { 'ctermbg':'Yellow',     'ctermfg':'Black', 'guibg':'#FFDB72', 'guifg':'Black' },
-		\   { 'ctermbg':'Red',        'ctermfg':'Black', 'guibg':'#FF7272', 'guifg':'Black' },
-		\   { 'ctermbg':'Magenta',    'ctermfg':'Black', 'guibg':'#FFB3FF', 'guifg':'Black' },
-		\   { 'ctermbg':'Blue',       'ctermfg':'Black', 'guibg':'#9999FF', 'guifg':'Black' },
+		\   { 'ctermbg':'Red'     , 'ctermfg':'Black' , 'guibg':'#FF7272' , 'guifg':'Black' } ,
+		\   { 'ctermbg':'Orange'  , 'ctermfg':'Black' , 'guibg':'#EAB98C' , 'guifg':'Black' } ,
+		\   { 'ctermbg':'Cyan'    , 'ctermfg':'Black' , 'guibg':'#8CCBEA' , 'guifg':'Black' } ,
+		\   { 'ctermbg':'Green'   , 'ctermfg':'Black' , 'guibg':'#A4E57E' , 'guifg':'Black' } ,
+		\   { 'ctermbg':'Yellow'  , 'ctermfg':'Black' , 'guibg':'#FFDB72' , 'guifg':'Black' } ,
+		\   { 'ctermbg':'Magenta' , 'ctermfg':'Black' , 'guibg':'#FFB3FF' , 'guifg':'Black' } ,
+		\   { 'ctermbg':'Blue'    , 'ctermfg':'Black' , 'guibg':'#9999FF' , 'guifg':'Black' } ,
 		\],
 	\	'extended': function('mark#palettes#Extended'),
 	\	'maximum': function('mark#palettes#Maximum')
@@ -242,19 +243,19 @@ nnoremap <silent> <Plug>MarkSearchCascadeStartNoStop    :<C-u>if ! mark#cascade#
 nnoremap <silent> <Plug>MarkSearchCascadeNextNoStop     :<C-u>if ! mark#cascade#Next(v:count1, 0, 0)<Bar>execute "normal! \<lt>C-\>\<lt>C-n>\<lt>Esc>"<Bar>echoerr ingo#err#Get()<Bar>endif<CR>
 nnoremap <silent> <Plug>MarkSearchCascadePrevNoStop     :<C-u>if ! mark#cascade#Next(v:count1, 0, 1)<Bar>execute "normal! \<lt>C-\>\<lt>C-n>\<lt>Esc>"<Bar>echoerr ingo#err#Get()<Bar>endif<CR>
 
-function! s:MakeDirectGroupMappings( isDefineDefaultMappings )
-	for l:cnt in range(1, g:mwDirectGroupJumpMappingNum)
-		for [l:isBackward, l:direction, l:keyModifier] in [[0, 'Next', ''], [1, 'Prev', 'C-']]
-			let l:plugMappingName = printf('<Plug>MarkSearchGroup%d%s', l:cnt, l:direction)
-			execute printf('nnoremap <silent> %s :<C-u>if ! mark#SearchGroupMark(%d, v:count1, %d, 1)<Bar>execute "normal! \<lt>C-\>\<lt>C-n>\<lt>Esc>"<Bar>echoerr ingo#err#Get()<Bar>endif<CR>', l:plugMappingName, l:cnt, l:isBackward)
-			if a:isDefineDefaultMappings && ! hasmapto(l:plugMappingName, 'n')
-				execute printf('nmap <%sk%d> %s', l:keyModifier, l:cnt, l:plugMappingName)
-			endif
-		endfor
-	endfor
-endfunction
-call s:MakeDirectGroupMappings(! exists('g:mw_no_mappings'))
-delfunction s:MakeDirectGroupMappings
+" function! s:MakeDirectGroupMappings( isDefineDefaultMappings )
+	" for l:cnt in range(1, g:mwDirectGroupJumpMappingNum)
+		" for [l:isBackward, l:direction, l:keyModifier] in [[0, 'Next', ''], [1, 'Prev', 'C-']]
+			" let l:plugMappingName = printf('<Plug>MarkSearchGroup%d%s', l:cnt, l:direction)
+			" execute printf('nnoremap <silent> %s :<C-u>if ! mark#SearchGroupMark(%d, v:count1, %d, 1)<Bar>execute "normal! \<lt>C-\>\<lt>C-n>\<lt>Esc>"<Bar>echoerr ingo#err#Get()<Bar>endif<CR>', l:plugMappingName, l:cnt, l:isBackward)
+			" if a:isDefineDefaultMappings && ! hasmapto(l:plugMappingName, 'n')
+				" execute printf('nmap <%sk%d> %s', l:keyModifier, l:cnt, l:plugMappingName)
+			" endif
+		" endfor
+	" endfor
+" endfunction
+" call s:MakeDirectGroupMappings(! exists('g:mw_no_mappings'))
+" delfunction s:MakeDirectGroupMappings
 
 if exists('g:mw_no_mappings')
 	let &cpo = s:save_cpo
@@ -282,24 +283,24 @@ endif
 " No default mapping for <Plug>MarkConfirmAllClear.
 " No default mapping for <Plug>MarkToggle.
 
-if !hasmapto('<Plug>MarkSearchCurrentNext', 'n')
-	nmap <unique> <Leader>* <Plug>MarkSearchCurrentNext
-endif
-if !hasmapto('<Plug>MarkSearchCurrentPrev', 'n')
-	nmap <unique> <Leader># <Plug>MarkSearchCurrentPrev
-endif
-if !hasmapto('<Plug>MarkSearchAnyNext', 'n')
-	nmap <unique> <Leader>/ <Plug>MarkSearchAnyNext
-endif
-if !hasmapto('<Plug>MarkSearchAnyPrev', 'n')
-	nmap <unique> <Leader>? <Plug>MarkSearchAnyPrev
-endif
-if !hasmapto('<Plug>MarkSearchNext', 'n')
-	nmap <unique> * <Plug>MarkSearchNext
-endif
-if !hasmapto('<Plug>MarkSearchPrev', 'n')
-	nmap <unique> # <Plug>MarkSearchPrev
-endif
+" if !hasmapto('<Plug>MarkSearchCurrentNext', 'n')
+	" nmap <unique> <Leader>* <Plug>MarkSearchCurrentNext
+" endif
+" if !hasmapto('<Plug>MarkSearchCurrentPrev', 'n')
+	" nmap <unique> <Leader># <Plug>MarkSearchCurrentPrev
+" endif
+" if !hasmapto('<Plug>MarkSearchAnyNext', 'n')
+	" nmap <unique> <Leader>/ <Plug>MarkSearchAnyNext
+" endif
+" if !hasmapto('<Plug>MarkSearchAnyPrev', 'n')
+	" nmap <unique> <Leader>? <Plug>MarkSearchAnyPrev
+" endif
+" if !hasmapto('<Plug>MarkSearchNext', 'n')
+	" nmap <unique> * <Plug>MarkSearchNext
+" endif
+" if !hasmapto('<Plug>MarkSearchPrev', 'n')
+	" nmap <unique> # <Plug>MarkSearchPrev
+" endif
 " No default mapping for <Plug>MarkSearchOrCurNext
 " No default mapping for <Plug>MarkSearchOrCurPrev
 " No default mapping for <Plug>MarkSearchOrAnyNext
