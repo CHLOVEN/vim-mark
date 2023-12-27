@@ -194,15 +194,15 @@ function! s:MarkMatch( indices, expr )
 endfunction
 " Initialize mark colors in a (new) window.
 function! mark#UpdateMark( ... )
-	for l:Predicate in g:mwExclusionPredicates
-		if ingo#actions#EvaluateOrFunc(l:Predicate)
-			" The window may have had marks applied previously. Clear any
-			" existing matches.
-			call s:MarkMatch(range(s:markNum), '')
+	" for l:Predicate in g:mwExclusionPredicates
+		" if ingo#actions#EvaluateOrFunc(l:Predicate)
+			" " The window may have had marks applied previously. Clear any
+			" " existing matches.
+			" call s:MarkMatch(range(s:markNum), '')
 
-			return
-		endif
-	endfor
+			" return
+		" endif
+	" endfor
 
 	if a:0
 		call call('s:MarkMatch', a:000)
