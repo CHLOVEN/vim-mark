@@ -83,6 +83,8 @@ endif
 "- default highlightings ------------------------------------------------------
 
 function! s:GetPalette()
+	let g:mwDefaultHighlightingPalette = 'extended'
+
 	let l:palette = []
 	if type(g:mwDefaultHighlightingPalette) == type([])
 		" There are custom color definitions, not a named built-in palette.
