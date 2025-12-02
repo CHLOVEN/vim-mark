@@ -83,7 +83,7 @@ endif
 "- default highlightings ------------------------------------------------------
 
 function! s:GetPalette()
-	let g:mwDefaultHighlightingPalette = 'extended'
+	let g:mwDefaultHighlightingPalette = 'maximum'
 
 	let l:palette = []
 	if type(g:mwDefaultHighlightingPalette) == type([])
@@ -265,20 +265,20 @@ if exists('g:mw_no_mappings')
 endif
 
 if !hasmapto('<Plug>MarkSet', 'n')
-	nmap <unique> <Leader>m <Plug>MarkSet
+	nmap <unique> <Leader>mmm <Plug>MarkSet
 endif
 if !hasmapto('<Plug>MarkSet', 'x')
-	xmap <unique> <Leader>m <Plug>MarkSet
+	xmap <unique> <Leader>mmm <Plug>MarkSet
 endif
 " No default mapping for <Plug>MarkIWhiteSet.
 if !hasmapto('<Plug>MarkRegex', 'n')
-	nmap <unique> <Leader>r <Plug>MarkRegex
+	nmap <unique> <Leader>mmr <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkRegex', 'x')
-	xmap <unique> <Leader>r <Plug>MarkRegex
+	xmap <unique> <Leader>mmr <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkClear', 'n')
-	nmap <unique> <Leader>n <Plug>MarkClear
+	" nmap <unique> <Leader>mmc <Plug>MarkClear
 endif
 " No default mapping for <Plug>MarkAllClear.
 " No default mapping for <Plug>MarkConfirmAllClear.
